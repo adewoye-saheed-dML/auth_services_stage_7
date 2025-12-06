@@ -39,14 +39,14 @@ Before running this project, ensure you have the following installed:
 ## Installation
 
 1. **Clone the repository:**
-   ```bash
+   ```
    git clone <your-repo-url>
    cd auth-service
 
 
 2.  **Install dependencies:**
     
-    Bash
+    
     
         npm install
     
@@ -70,7 +70,7 @@ Before running this project, ensure you have the following installed:
     
     Ensure the database defined in DB\_NAME exists in your Postgres instance.
     
-    Bash
+    
     
         # Example using psql
         psql -U postgres -c "CREATE DATABASE nest_auth_service;"
@@ -84,7 +84,7 @@ Before running this project, ensure you have the following installed:
 
 ### Development Mode
 
-Bash
+
 
     npm run start:dev
 
@@ -92,7 +92,6 @@ The server will start on `http://localhost:3000`.
 
 ### Production Mode
 
-Bash
 
     npm run build
     npm run start:prod
@@ -134,9 +133,8 @@ This project includes a built-in Swagger UI for testing and documentation.
 
 ## Testing
 
-The project is configured with **Jest** for unit and end-to-end testing.
+The project is configured with Jest for unit and end-to-end testing.
 
-Bash
 
     # Run unit tests
     npm run test
