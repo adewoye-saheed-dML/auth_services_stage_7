@@ -1,6 +1,7 @@
-# NestJS Auth Service (Task 3)
+# A Mini Authentication + API Key System for Service-to-Service Access
 
-A robust, backend-only authentication system built with **NestJS**, **TypeORM**, and **PostgreSQL**. This service provides a hybrid authentication mechanism supporting both **User Login (JWT)** and **Service-to-Service Access (API Keys)**.
+
+A robust, backend-only authentication system built with NestJS, TypeORM, and PostgreSQL. This service provides a hybrid authentication mechanism supporting both User Login (JWT) and Service-to-Service Access (API Keys).
 
 ## Features
 
