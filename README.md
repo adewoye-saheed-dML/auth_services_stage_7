@@ -150,8 +150,6 @@ Bash
 
 ## Project Structure
 
-## 📂 Project Structure
-
 ```text
 src/
 ├── auth/               # Authentication logic (Login, Signup, Guards)
