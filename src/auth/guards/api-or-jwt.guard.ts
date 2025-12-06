@@ -29,7 +29,10 @@ import {
           request['authType'] = 'jwt';
           return true;
         } catch (e) {
-          // Token invalid, fall through to check API key
+          // --- LOGGING FOR DEBUGGING ---
+          console.log('🔴 JWT Verification Failed:', e.message);
+          console.log('🔴 Token used:', token);
+          // -----------------------------
         }
       }
   
@@ -43,6 +46,8 @@ import {
         }
       }
   
-      throw new UnauthorizedException('Please provide a valid Bearer Token or API Key');
+      throw new UnauthorizedException(
+        'Please provide a valid Bearer Token or API Key',
+      );
     }
   }
