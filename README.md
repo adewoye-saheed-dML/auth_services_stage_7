@@ -150,17 +150,20 @@ Bash
 
 ## Project Structure
 
-src/
-    ├── auth/               # Authentication logic (Login, Signup, Guards)
-    │   ├── guards/         # The Hybrid ApiOrJwtAuthGuard
-    │   └── dto/            # Data Transfer Objects
-    ├── keys/               # API Key generation and validation logic
-    │   └── entities/       # ApiKey Entity (Schema)
-    ├── users/              # User management
-    │   └── entities/       # User Entity (Schema)
-    ├── common/             # Shared utilities (Decorators)
-    └── app.module.ts       # Root module wiring everything together
+## 📂 Project Structure
 
+```text
+src/
+├── auth/               # Authentication logic (Login, Signup, Guards)
+│   ├── guards/         # The Hybrid ApiOrJwtAuthGuard
+│   └── dto/            # Data Transfer Objects
+├── keys/               # API Key generation and validation logic
+│   └── entities/       # ApiKey Entity (Schema)
+├── users/              # User management
+│   └── entities/       # User Entity (Schema)
+├── common/             # Shared utilities (Decorators)
+└── app.module.ts       # Root module wiring everything together
+```
 ## License
 
 This project is [MIT licensed](https://www.google.com/search?q=LICENSE).
