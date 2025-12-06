@@ -40,7 +40,7 @@ Before running this project, ensure you have the following installed:
 
 1. **Clone the repository:**
    ```
-   git clone <your-repo-url>
+   git clone https://github.com/adewoye-saheed-dML/auth_services_stage_7
    cd auth-service
 
 
@@ -107,6 +107,17 @@ This project includes a built-in Swagger UI for testing and documentation.
 2.  Navigate to **[http://localhost:3000/api](https://www.google.com/search?q=http://localhost:3000/api)** in your browser.
     
 3.  You can test all endpoints directly from this interface.
+
+### Test Screenshots
+<img width="1342" height="400" alt="Image" src="https://github.com/user-attachments/assets/6f50aaad-5f62-498d-afbc-e8ffda7d9e4d" />
+
+<img width="1319" height="735" alt="Image" src="https://github.com/user-attachments/assets/84201bb9-8f52-4442-93fd-626ff0d5bd51" />
+
+<img width="1333" height="386" alt="Image" src="https://github.com/user-attachments/assets/5ca88596-6dbb-4f04-8243-0cef8b17eafa" />
+
+<img width="1365" height="673" alt="Image" src="https://github.com/user-attachments/assets/27e50bad-f031-4811-978f-3c1e663293e5" />
+
+<img width="1366" height="679" alt="Image" src="https://github.com/user-attachments/assets/1a8646ae-4bc1-4cb3-8117-40bd90086594" />
     
 
 * * *
