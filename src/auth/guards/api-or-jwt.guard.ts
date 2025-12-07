@@ -31,7 +31,7 @@ import {
           request['authType'] = 'jwt';
           return true;
         } catch (e) {
-          console.log('🔴 JWT Verification Failed:', e.message);
+          console.log('JWT Verification Failed:', e.message);
         }
       }
   
