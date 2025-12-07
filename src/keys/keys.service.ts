@@ -12,13 +12,12 @@ export class KeysService {
     @InjectRepository(ApiKey) private repo: Repository<ApiKey>,
   ) {}
 
-  // --- Create Key ---
   async createKey(user: User, serviceName: string) {
     const rawKey = 'sk_live_' + crypto.randomBytes(20).toString('hex');
     const hash = await bcrypt.hash(rawKey, 10);
 
     const expiresAt = new Date();
-    expiresAt.setDate(expiresAt.getDate() + 30); // 30 Day Expiry
+    expiresAt.setDate(expiresAt.getDate() + 30); // 30 Day Expiration
 
     const apiKey = this.repo.create({
       prefix: rawKey.substring(0, 10),
@@ -26,7 +25,7 @@ export class KeysService {
       user: user,
       isActive: true,
       expiresAt: expiresAt,
-      serviceName: serviceName, // <--- Saving the name
+      serviceName: serviceName, // <--- Saving the name here
     });
 
     await this.repo.save(apiKey);
@@ -39,7 +38,6 @@ export class KeysService {
     };
   }
 
-  // --- Validate Key (Used by Guard) ---
   async validateApiKey(rawKey: string) {
     const prefix = rawKey.substring(0, 10);
     
@@ -50,15 +48,12 @@ export class KeysService {
 
     if (!keyRecord) return null;
 
-    // Check Revocation
     if (!keyRecord.isActive) return null;
 
-    // Check Expiration
     if (keyRecord.expiresAt && new Date() > keyRecord.expiresAt) {
       return null;
     }
 
-    // Check Hash
     if (await bcrypt.compare(rawKey, keyRecord.hash)) {
       return keyRecord;
     }
@@ -66,7 +61,6 @@ export class KeysService {
     return null;
   }
 
-  // --- Revoke Key ---
   async revokeKey(id: string, userId: string) {
     const key = await this.repo.findOne({
       where: { id, user: { id: userId } },

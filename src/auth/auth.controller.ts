@@ -1,33 +1,28 @@
-import { Controller, Post, Body, Get, UseGuards } from '@nestjs/common';
-import { AuthService } from './auth.service';
-import { ApiOrJwtAuthGuard } from './guards/api-or-jwt.guard';
+import { Controller, Get, UseGuards } from '@nestjs/common';
+import { ApiOrJwtAuthGuard } from './guards/api-or-jwt.guard'; // Keep this one for "OR" logic
+import { JwtAuthGuard } from './guards/jwt-auth.guard';
 import { CurrentUser } from '../common/decorators/current-user.decorator';
-import { ApiBearerAuth, ApiSecurity, ApiTags } from '@nestjs/swagger'; // Import these
-import { AuthDto } from './dto/auth.dto'; // Import the DTO
+import { ApiBearerAuth, ApiSecurity, ApiTags } from '@nestjs/swagger';
 
-@ApiTags('Authentication') // Groups endpoints in Swagger
+@ApiTags('Authentication')
 @Controller('auth')
 export class AuthController {
-  constructor(private authService: AuthService) {}
+  // ... login/signup ...
 
-  @Post('signup')
-  signup(@Body() dto: AuthDto) { // Change 'any' to 'AuthDto'
-    return this.authService.signup(dto);
+  // Scenario 1: Strict User Route (e.g. Change Password)
+  @Get('me')
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard) 
+  getMyDetails(@CurrentUser() user) {
+    return user;
   }
 
-  @Post('login')
-  login(@Body() dto: AuthDto) { // Change 'any' to 'AuthDto'
-    return this.authService.login(dto);
-  }
-
+  // Scenario 2: Hybrid Route (Users OR Bots can view profile)
   @Get('profile')
-  @UseGuards(ApiOrJwtAuthGuard)
-  @ApiBearerAuth() // Shows the Lock icon for JWT
-  @ApiSecurity('x-api-key') // Shows the Lock icon for API Key
-  getProfile(@CurrentUser() user: any) {
-    return {
-      message: 'Secure data accessed',
-      user: user,
-    };
+  @ApiBearerAuth()
+  @ApiSecurity('x-api-key')
+  @UseGuards(ApiOrJwtAuthGuard) // Stays Hybrid
+  getProfile(@CurrentUser() user) {
+    return user;
   }
 }
