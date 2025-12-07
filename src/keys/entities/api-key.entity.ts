@@ -12,11 +12,11 @@ export class ApiKey {
   @Column()
   hash: string;
 
-  // NEW: Allows you to turn off a key without deleting it
+ 
   @Column({ default: true })
   isActive: boolean;
 
-  // NEW: Optional expiration date
+
   @Column({ type: 'timestamp', nullable: true })
   expiresAt: Date;
 

@@ -13,17 +13,17 @@ export class KeysService {
   ) {}
 
   async createKey(user: User) {
-    // 1. Generate the raw key
+    // Generate the raw key
     const rawKey = 'sk_live_' + crypto.randomBytes(20).toString('hex');
     
-    // 2. Hash it
+    //  Hash it
     const hash = await bcrypt.hash(rawKey, 10);
 
-    // 3. Set Expiration (e.g., 30 days from now)
+    // (30 days from now)
     const expiresAt = new Date();
     expiresAt.setDate(expiresAt.getDate() + 30);
 
-    // 4. Create the record
+    // Create the record
     const apiKey = this.repo.create({
       prefix: rawKey.substring(0, 10),
       hash: hash,
@@ -34,7 +34,7 @@ export class KeysService {
 
     await this.repo.save(apiKey);
 
-    // 5. Return raw key + expiration date
+
     return {
       apiKey: rawKey,
       expiresAt: expiresAt,
@@ -60,12 +60,12 @@ export class KeysService {
       return null;
     }
 
-    // Check 3: Is it Expired?
+ 
     if (keyRecord.expiresAt && new Date() > keyRecord.expiresAt) {
       return null;
     }
 
-    // Check 4: Does the password match?
+
     if (await bcrypt.compare(rawKey, keyRecord.hash)) {
       return keyRecord;
     }
