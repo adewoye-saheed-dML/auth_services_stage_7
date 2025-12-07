@@ -25,14 +25,13 @@ import {
         const token = authHeader.split(' ')[1];
         try {
           const decoded = this.jwtService.verify(token);
-          request['user'] = decoded;
+          
+          request['user'] = { ...decoded, id: decoded.sub };
+          
           request['authType'] = 'jwt';
           return true;
         } catch (e) {
-          // --- LOGGING FOR DEBUGGING ---
           console.log('🔴 JWT Verification Failed:', e.message);
-          console.log('🔴 Token used:', token);
-          // -----------------------------
         }
       }
   
