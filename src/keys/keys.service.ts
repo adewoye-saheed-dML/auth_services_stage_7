@@ -72,4 +72,21 @@ export class KeysService {
     
     return null;
   }
+
+  async revokeKey(id: string, userId: string) {
+    // 1. Find the key (Ensure it belongs to the requesting user!)
+    const key = await this.repo.findOne({
+      where: { id, user: { id: userId } },
+    });
+
+    if (!key) {
+      throw new Error('Key not found or does not belong to you');
+    }
+
+    // 2. Soft Delete (Set active to false)
+    key.isActive = false;
+    await this.repo.save(key);
+
+    return { message: 'API Key revoked successfully' };
+  }
 }
