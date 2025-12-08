@@ -17,7 +17,7 @@ export class KeysService {
     const hash = await bcrypt.hash(rawKey, 10);
 
     const expiresAt = new Date();
-    expiresAt.setDate(expiresAt.getDate() + 30); // 30 Day Expiration
+    expiresAt.setDate(expiresAt.getDate() + 30); 
 
     const apiKey = this.repo.create({
       prefix: rawKey.substring(0, 10),
@@ -25,12 +25,13 @@ export class KeysService {
       user: user,
       isActive: true,
       expiresAt: expiresAt,
-      serviceName: serviceName, // <--- Saving the name here
+      serviceName: serviceName, 
     });
 
     await this.repo.save(apiKey);
 
     return {
+      id: apiKey.id,
       apiKey: rawKey,
       serviceName: serviceName,
       expiresAt: expiresAt,
