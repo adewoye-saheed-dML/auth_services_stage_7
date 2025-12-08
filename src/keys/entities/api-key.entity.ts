@@ -7,16 +7,20 @@ export class ApiKey {
   id: string;
 
   @Column()
-  prefix: string;
+  prefix: string; // e.g., "sk_live_..."
 
   @Column()
-  hash: string;
+  hash: string;   // Hashed version of the key
 
- 
+  // Stores the name of the service (e.g., "Billing App")
+  @Column({ nullable: true }) 
+  serviceName: string;
+
+  // Revocation: Allows "soft delete"
   @Column({ default: true })
   isActive: boolean;
 
-
+  // Expiration: When the key stops working
   @Column({ type: 'timestamp', nullable: true })
   expiresAt: Date;
 
